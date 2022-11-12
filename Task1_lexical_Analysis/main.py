@@ -19,13 +19,32 @@ def tokenize(code):
                     'int', 'long', 'register', 'return',
                     'short', 'signed', 'sizeof', 'static',
                     'struct', 'switch', 'typedef', 'union',
-                    'unsigned', 'void', 'volatile', 'while'}
+                    'unsigned', 'void', 'volatile', 'while',
+                    'asm', 'dynamic_cast', 'namespace', 'reinterpret_cast',
+                    'bool', 'explicit', 'new', 'static_cast',
+                    'false', 'catch', 'operator', 'template',
+                    'friend', 'private', 'class', 'this',
+                    'inline', 'public', 'throw', 'const_cast',
+                    'delete', 'mutable', 'protected', 'true',
+                    'try', 'typeid', 'typename', 'using',
+                    'virtual', 'wchar_t'}
     # each element in the token_specification list is a named tuple that represents a possible token
     token_specification = [
         # ToDo: Check this example then complete the rest of the tokens.
         # I use a namedtuple in here. It's like a normal tuple but with named fields.
         # So i can get the values using names.
-        ('assignment_operator', r'=|(/=)|\*='),  # assignment-operator identifier
+        ('unary_operator', r'\++|--'),                                                            # unary_operator identifier
+        ('arithmetic_operator', r'\+|-|\*|/|%'),                                                  # arithmetic_operator identifier
+        ('relational_operator', r'<|<=|>|>=|==|!='),                                              # relational-operator identifier
+        ('logical_operator', r'(\|\|)|(&&)|(!)'),                                                 # logical_operator identifier
+        ('bitwise_operator', r'(&)|(\|)|(<<)|(>>)|(~)|(^)'),                                      # bitwise_operator identifier
+        ('assignment_operator', r'(=)|(/=)|(\*=)|(%=)|(\+=)|(-=)|(<<=)|(>>=)|(&=)|(\^=)|(\|=)'),  # assignment-operator identifier
+        
+                                                
+
+
+       
+        
     ]
 
     # This creates a regular expression that contains all the expressions u wrote in the token_specification list.
@@ -63,7 +82,40 @@ def tokenize(code):
 
 def main():
     # ToDo: U have to add the file handling logic in here and then pass the code to the tokenize() function.
-    for token in tokenize(add_the_code_here):
+    code = '''
+            //Mohamed vgbgdffffffff
+            /*fdrrfr*/
+            string x = "dfggrffffffffffffffff";
+            int x = 5 ;
+            x%=1;
+            x+=3;
+            x-=5;
+            x<<=4;
+            x>>=5;
+            x&=4;
+            x^=6;
+            x|=8;
+            x = 5 * 4 ;
+            x = 5 & 4 ;
+            x = x + y ;
+            x = x - y ;
+            x = x ! y ;
+            x = x ~ y ;
+            x++;
+            x--;
+            x = x + y ;
+            x = x - y ;
+            x = x * y ;
+            z = z / y ;
+            z = x% y ;
+            x = x && y ;
+            x = x || y ;
+            x = x ! y ;
+            if(x!=y)
+           
+
+    '''
+    for token in tokenize(code):
         print(token)
 
 
